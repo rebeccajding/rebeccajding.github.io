@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects — Rebecca</title>
+  <meta name="description" content="Selected live events by Rebecca Ding.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;1,400&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/projects/projects.css?v=m3">
+</head>
+<body class="page-projects">
+
+  <header class="header">
+    <a class="header__brand" href="/">REBECCA</a>
+    <nav aria-label="Main">
+      <ul class="header__nav">
+        <li><a href="/projects" aria-current="page">PROJECTS</a></li>
+        <!-- Parked for now (page saved in /Portfolio/parked/about): <li><a href="/about">ABOUT</a></li> -->
+        <!-- Parked for now (page saved in /Portfolio/parked/contact): <li><a href="/contact">CONTACT</a></li> -->
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Stays on screen while the featured projects pass through the centre -->
+  <div class="pins" aria-hidden="true">
+    <p class="pins__hint">SCROLL TO EXPLORE</p>
+    <div class="pins__rail"><span class="pins__marker"></span></div>
+  </div>
+
+  <main>
+    <h1 class="visually-hidden">Projects</h1>
+
+    <section class="featured" aria-label="Live events" style="--count: 4;">
+      <div class="featured__stage">
+      <div class="featured__track">
+
+      <!-- Photos are pre-cropped to 16:9; every frame shares one size (projects.css). -->
+      <ol class="featured__list">
+        <li class="row">
+          <a class="row__link" href="/projects/maggie" aria-label="Maggie — view project">
+            <span class="row__index">01</span>
+            <span class="row__media">
+              <img src="/images/projects/maggie/project.jpg" width="1400" height="787"
+                   alt="Guests at a long candlelit garden table under a tree hung with stars">
+            </span>
+            <span class="row__caption">
+              <span class="row__name">01- MAGGIE</span>
+              <span class="row__date">09/2025</span>
+            </span>
+          </a>
+        </li>
+        <li class="row">
+          <a class="row__link" href="/projects/daily-californian" aria-label="The Daily Californian — view project">
+            <span class="row__index">02</span>
+            <span class="row__media">
+              <img src="/images/projects/daily-californian/project.jpg" width="1400" height="787"
+                   alt="A speaker at a podium in front of a UC Berkeley Graduate School of Journalism backdrop" loading="lazy">
+            </span>
+            <span class="row__caption">
+              <span class="row__name">02- THE DAILY CALIFORNIAN</span>
+              <span class="row__date">11/2025</span>
+            </span>
+          </a>
+        </li>
+        <li class="row">
+          <a class="row__link" href="/projects/rebecca" aria-label="Rebecca — view project">
+            <span class="row__index">03</span>
+            <span class="row__media">
+              <img src="/images/projects/rebecca/project.jpg?v=2" width="1400" height="787"
+                   alt="A frosted cake, flowers, wine and a charcuterie board on a kitchen counter" loading="lazy">
+            </span>
+            <span class="row__caption">
+              <span class="row__name">03- REBECCA</span>
+              <span class="row__date">04/2026</span>
+            </span>
+          </a>
+        </li>
+        <li class="row">
+          <a class="row__link" href="/projects/fiona" aria-label="Fiona — view project">
+            <span class="row__index">04</span>
+            <span class="row__media">
+              <img src="/images/projects/fiona/project.jpg" width="1400" height="788"
+                   alt="Guests around a candlelit dinner table set with white flowers and wine" loading="lazy">
+            </span>
+            <span class="row__caption">
+              <span class="row__name">04- FIONA</span>
+              <span class="row__date">11/2025</span>
+            </span>
+          </a>
+        </li>
+      </ol>
+      </div>
+      </div>
+    </section>
+
+    <p class="mediums__intro" id="mediums-intro">Outside of live events- ideas carried through to finished work, in other mediums.</p>
+
+    <!-- Same pinned scroll as the live events -->
+    <section class="featured featured--mediums" aria-labelledby="mediums-intro" style="--count: 2;">
+      <div class="featured__stage">
+      <div class="featured__track">
+      <ol class="featured__list">
+        <li class="row">
+          <a class="row__link" href="/projects/all-alone" aria-label="All Alone — view project">
+            <span class="row__index">05</span>
+            <span class="row__media">
+              <img src="/images/projects/all-alone/project.jpg" width="1400" height="787"
+                   alt="A woman in a dark jacket standing alone in a field of tall dry grass" loading="lazy">
+            </span>
+            <span class="row__caption">
+              <span class="row__name">05- ALL ALONE</span>
+            </span>
+          </a>
+        </li>
+        <li class="row">
+          <a class="row__link" href="/projects/the-dinner-table-podcast" aria-label="The Dinner Table Podcast — view project">
+            <span class="row__index">06</span>
+            <span class="row__media">
+              <img src="/images/projects/the-dinner-table-podcast/project.jpg" width="1308" height="736"
+                   alt="A red vinyl record spinning on a turntable, the tonearm resting on it and the cream label at the bottom" loading="lazy">
+            </span>
+            <span class="row__caption">
+              <span class="row__name">06- THE DINNER TABLE PODCAST</span>
+            </span>
+          </a>
+        </li>
+      </ol>
+      </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/projects/projects.js?v=m3"></script>
+</body>
+</html>

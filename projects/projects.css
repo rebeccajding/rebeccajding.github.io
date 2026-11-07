@@ -1,0 +1,186 @@
+/*
+  All Projects page. Shares tokens, fonts, header and --u (one Figma px,
+  1728×1117 frame) with the homepage via /styles.css.
+*/
+
+.page-projects {
+  /* scroll distance from one centred project to the next (sets the pace) */
+  --scroll-pitch-n: 472.5;
+  --scroll-pitch: calc(var(--scroll-pitch-n) * var(--u));
+  /*
+    Visible distance between project centres on screen. Half the enlarged
+    16:9 card (348.75 / 2) + half a neighbour one row away (180 / 2) = 264.4,
+    plus a ~100px gap between photos.
+  */
+  --pitch-n: 364.4;
+  --pitch: calc(var(--pitch-n) * var(--u));
+  /*
+    Fraction of each project's scroll distance during which the track pauses
+    with that project centred (half before reaching centre, half after).
+  */
+  --hold: 0.068;
+  /* extra pause after the last project, which then leaves at normal page speed */
+  --hold-tail: 0.65;
+  /* card frame at its enlarged size: Figma's 620px width at 16:9 */
+  --card-w: calc(620 * var(--u));
+  --card-h: calc(var(--card-w) * 9 / 16);
+  /* horizontal offset of the 1728px composition when the window is wider */
+  --frame-x: calc((100vw - 1728 * var(--u)) / 2);
+  min-height: 100dvh;
+}
+
+/* Header scrolls with the page here (it's fixed on the homepage) */
+.page-projects .header { position: absolute; }
+.header a[aria-current='page']::after { transform: scaleX(1); }
+
+/* ---------- Pinned hint + scroll rail ---------- */
+.pins {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 300ms linear;
+}
+.pins__hint {
+  position: absolute;
+  left: calc(80 * var(--u));
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: max(9px, 11 * var(--u));
+  line-height: 1.2;
+  color: var(--muted-text);
+  white-space: nowrap;
+}
+.pins__rail {
+  position: absolute;
+  right: calc(120 * var(--u));
+  top: 50%;
+  width: 1px;
+  height: calc(520 * var(--u));
+  transform: translateY(-50%);
+  background: #ccc7bd;
+}
+.pins__marker {
+  position: absolute;
+  left: -1px;
+  top: 0;
+  width: 3px;
+  height: calc(120 * var(--u));
+  border-radius: 2px;
+  background: var(--ink);
+  transform: translateY(calc(var(--progress, 0) * 400 * var(--u)));
+  will-change: transform;
+}
+
+/* ---------- Featured projects ---------- */
+/*
+  The section is tall enough to give each project --scroll-pitch of scrolling.
+  Inside it a full-screen stage stays pinned while the track of rows slides up
+  by --pitch per project (projects.js sets the offset).
+*/
+.featured {
+  position: relative;
+  /* last project also gets the second half of its centred pause */
+  height: calc(100dvh + (var(--count) - 1 + var(--hold) * var(--hold-tail)) * var(--scroll-pitch));
+}
+.featured__stage {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  overflow: hidden;
+}
+.featured__track {
+  /* origin = viewport centre; Maggie's centre sits on it at scroll 0 */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(1728 * var(--u));
+  margin-left: calc(-864 * var(--u));
+  transform: translateY(calc(var(--offset, 0) * -1px));
+  will-change: transform;
+}
+
+
+.row {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  /* row centred on its slot: --i × pitch below Maggie */
+  top: calc(var(--i, 0) * var(--pitch) - var(--pitch) / 2);
+  height: var(--pitch);
+  will-change: opacity;
+}
+.row__link { display: block; position: relative; height: 100%; }
+.row__index {
+  position: absolute;
+  left: calc(470 * var(--u));
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: max(10px, 12 * var(--u));
+  line-height: 1.2;
+  color: var(--muted-text);
+}
+.row__media {
+  position: absolute;
+  left: calc((864 - 310) * var(--u));
+  top: 50%;
+  width: var(--card-w);
+  height: var(--card-h);
+  margin-top: calc(var(--card-h) / -2);
+  overflow: hidden;
+  border-radius: 2px;
+  background: #e4e0d8;
+  transform: scale(var(--k, 1));
+  will-change: transform;
+}
+.row__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.row__caption {
+  position: absolute;
+  left: calc(1230 * var(--u));
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: calc(10 * var(--u));
+  white-space: nowrap;
+}
+.row__name {
+  font-size: max(10px, 15 * var(--u));
+  line-height: 1.2;
+  transform-origin: left center;
+  transform: scale(var(--name-k, 1));
+  will-change: transform;
+}
+.row__date {
+  font-size: max(9px, 11 * var(--u));
+  line-height: 1.2;
+  color: var(--muted-text);
+}
+.row__link:focus-visible { outline: none; }
+.row__link:focus-visible .row__media { outline: 1px solid var(--ink); outline-offset: calc(8 * var(--u)); }
+
+/* ---------- Other mediums ---------- */
+.mediums__intro {
+  position: relative;
+  z-index: 1;
+  /*
+    Pull the break up so it follows the last project instead of after the
+    stage's lower half: its enlarged half-height (174.4) + 43, so with the 57px padding
+    the text starts ~100px below her photo, matching the gap between photos.
+  */
+  margin: calc(217.4 * var(--u) - 50dvh) auto 0;
+  padding: calc(57 * var(--u)) 0;
+  font-size: max(12px, 18 * var(--u));
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+  font-style: italic;
+  text-align: center;
+  white-space: nowrap;
+}
+/* Mirror of the intro's pull-up: the first medium's photo starts ~100px below the text */
+.featured--mediums { margin-top: calc(217.4 * var(--u) - 50dvh); }

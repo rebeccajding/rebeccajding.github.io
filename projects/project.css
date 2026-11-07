@@ -1,0 +1,804 @@
+/*
+  Project detail pages (Figma: "<Project> / Project Introduction" + the shared
+  "Project Ending / In the Moment" frame). Uses tokens and --u from /styles.css.
+*/
+
+.page-project {
+  --frame-x: calc((100vw - 1728 * var(--u)) / 2);
+  /* Shared caption typography — use class .caption (or these variables) for every caption.
+     17px at the 1728px reference; line height keeps the original 22/15 ratio. */
+  --caption-size: max(12px, 17 * var(--u));
+  --caption-line-height: 1.4667;
+  /* Header bar: opaque behind the header (to just below its text), then a
+     narrow 20px gradient — content stays sharp until it reaches the bar. */
+  --header-solid: calc(88 * var(--u));
+  --header-fade: 20px;
+}
+
+/* Shared caption style */
+.caption {
+  font-size: var(--caption-size);
+  line-height: var(--caption-line-height);
+}
+
+/* ---------- Opaque bar behind the fixed header ----------
+   Paper-coloured, fixed to the viewport, above the content and below the
+   header text. Content passing under it is completely hidden; the only
+   transition is a 20px gradient at its lower edge. No blur or filters.
+   project.js keeps it transparent while the dark hero photo is behind the
+   header (so the hero has no light band) and fades it in as the hero leaves. */
+.header-fade {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9;
+  height: calc(var(--header-solid) + var(--header-fade));
+  background: linear-gradient(
+    to bottom,
+    var(--paper) 0,
+    var(--paper) var(--header-solid),
+    rgba(246, 244, 240, 0) 100%
+  );
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* ---------- Full-screen hero ---------- */
+.hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  color: var(--paper);
+  isolation: isolate;
+}
+.hero__img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--focus, 50% 50%);
+}
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(15, 10, 6, 0.5);
+}
+
+/* Positions are fractions of the 1728×1117 Figma frame */
+/* Fixed while scrolling. Paper-coloured text with difference blending reads
+   light over the dark hero and near-black over the light sections below. */
+.hero__header {
+  position: fixed;
+  z-index: 10;
+  color: var(--paper);
+  mix-blend-mode: difference;
+  top: calc(58 * var(--u));
+  left: calc(80 * var(--u));
+  right: calc(80 * var(--u));
+  display: flex;
+  justify-content: space-between;
+  font-size: max(11px, 18 * var(--u));
+  line-height: 1.22;
+  white-space: nowrap;
+}
+.hero__header a { position: relative; }
+.hero__header a::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: calc(-4 * var(--u));
+  height: 1px; background: currentColor;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 400ms cubic-bezier(.2, .7, .2, 1);
+}
+.hero__header a:hover::after { transform: scaleX(1); }
+.hero__index {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.hero__title {
+  position: absolute;
+  left: calc(80 * var(--u));
+  right: calc(80 * var(--u));
+  top: calc(340 / 1117 * 100%);
+  font-size: calc(144 * var(--u));
+  font-weight: 400;
+  line-height: 1.21;
+  letter-spacing: -0.04em;
+  text-align: center;
+  white-space: nowrap;
+}
+.hero__details {
+  position: absolute;
+  left: calc(943 / 1728 * 100%);
+  top: calc(559 / 1117 * 100%);
+  display: flex;
+  flex-direction: column;
+  gap: calc(8 * var(--u));
+}
+.hero__row { display: flex; gap: calc(5 * var(--u)); }
+.hero__row dt {
+  width: calc(154 * var(--u));
+  font-size: max(9px, 12 * var(--u));
+  line-height: calc(24 * var(--u));
+}
+.hero__row dd {
+  width: calc(476 * var(--u));
+  font-size: max(12px, 18 * var(--u));
+  line-height: calc(27 * var(--u));
+}
+.hero__foot {
+  position: absolute;
+  bottom: calc(54 * var(--u));
+  font-size: max(10px, 13 * var(--u));
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.hero__foot--left { left: calc(80 * var(--u)); }
+.hero__foot--right { left: calc(1488 / 1728 * 100%); }
+.hero__foot--right:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- In the Moment ---------- */
+.moment {
+  position: relative;
+  height: calc(1117 * var(--u));
+  overflow: hidden;
+  background: var(--paper);
+}
+.moment__frame {
+  /* the 1728px Figma frame, centred in wider windows */
+  position: absolute;
+  top: 0;
+  left: var(--frame-x);
+  width: calc(1728 * var(--u));
+  height: 100%;
+}
+.moment__kicker,
+.moment__count {
+  position: absolute;
+  top: calc(62 * var(--u));
+  font-size: max(10px, 13 * var(--u));
+  line-height: 1.2;
+  color: var(--muted-text);
+  white-space: nowrap;
+}
+.moment__kicker { left: calc(72 * var(--u)); letter-spacing: 0.14em; }
+.moment__count { right: calc(72 * var(--u)); letter-spacing: 0.1em; }
+.moment__rule {
+  position: absolute;
+  top: calc(98 * var(--u));
+  left: calc(72 * var(--u));
+  right: calc(72 * var(--u));
+  height: 1px;
+  background: var(--header-rule, rgba(33, 31, 28, 0.24));
+}
+.moment__title {
+  position: absolute;
+  top: calc(132 * var(--u));
+  left: calc(72 * var(--u));
+  font-size: calc(72 * var(--u));
+  font-weight: 400;
+  line-height: 1.21;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+.moment__accent {
+  position: absolute;
+  top: calc(187 * var(--u));
+  right: calc(72 * var(--u));
+  width: calc(168 * var(--u));
+  height: 2px;
+  background: var(--ink);
+}
+/* Each photo frame: centre (--x, --y), size (--w × --h), tilt (--r), Figma px */
+.moment__photo {
+  position: absolute;
+  left: calc((var(--x) - var(--w) / 2) * var(--u));
+  top: calc((var(--y) - var(--h) / 2) * var(--u));
+  width: calc(var(--w) * var(--u));
+  height: calc(var(--h) * var(--u));
+  margin: 0;
+  padding: calc(11 * var(--u));
+  background: var(--photo-frame, #fdfbf6);
+  border: 1px solid rgba(33, 31, 28, 0.12);
+  filter: drop-shadow(0 calc(12 * var(--u)) calc(14 * var(--u)) rgba(20, 18, 15, 0.16));
+  transform: rotate(var(--r, 0deg));
+}
+.moment__photo img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- Project brief ----------
+   One screen tall. Two groups on the page's 80px margins:
+   - upper right: two photos at a shared 367px height, each in its own
+     proportions, with the description underneath at exactly their width
+   - lower left: a photo at the same 367px height with text beside it, bottom-aligned
+   Generous empty space between them, as in the sketch. */
+.brief {
+  position: relative;
+  height: calc(1117 * var(--u));
+  background: var(--paper);
+  overflow: hidden;
+}
+.brief__group { position: absolute; }
+.brief__group--upper {
+  top: calc(120 * var(--u));
+  right: calc(80 * var(--u));
+  /* as wide as the photos; the caption below takes this width without widening it */
+  width: max-content;
+}
+.brief__group--lower {
+  left: calc(80 * var(--u));
+  bottom: calc(117 * var(--u));
+  display: flex;
+  /* text sits beside the photo, bottom edges aligned */
+  align-items: flex-end;
+  gap: calc(40 * var(--u));
+}
+
+.brief__photos {
+  display: flex;
+  gap: calc(14 * var(--u));
+  height: calc(367 * var(--u));
+}
+/* Photos share one height; each width follows the photo's own proportions
+   (from its width/height attributes), so nothing is cropped. */
+.brief__photo { margin: 0; height: 100%; flex: none; }
+.brief__photo img { display: block; height: 100%; width: auto; }
+
+/* Lower photo: same height as the upper photos, so a 16:9 photo here is
+   exactly the size of the 16:9 photo in the upper group */
+.brief__photo--lower { height: calc(367 * var(--u)); }
+
+.brief__group--upper .brief__text {
+  margin-top: calc(24 * var(--u));
+  /* exactly the photos' combined width, wrapping instead of widening the group */
+  width: 0;
+  min-width: 100%;
+}
+/* side text: wide enough for two lines at most */
+.brief__text--side { width: calc(420 * var(--u)); }
+
+/* ---------- EXPERIMENT: Maggie two-beat layout (/projects/maggie/experiment/) ----------
+   Scoped to .brief--exp so the approved .brief layout is untouched. */
+.brief--exp {
+  height: auto;
+  overflow: visible;
+  /* Shared large-photo size used by every beat: 960 wide, and the height that
+     gives at the 1400×787 (≈16:9) photo shape. */
+  --exp-large-w: calc(960 * var(--u));
+  --exp-large-h: calc(var(--exp-large-w) * 787 / 1400);
+  /* Beats 1 and 2 share the large-photo height */
+  --exp-pair-h: var(--exp-large-h);
+}
+/* each beat is 75% of a screen tall, so the next composition arrives sooner
+   and the empty space between groups is smaller (the next group may peek in
+   at the bottom of the screen) */
+.exp-beat {
+  position: relative;
+  height: max(75vh, 1117 * 0.75 * var(--u));
+  height: max(75dvh, 1117 * 0.75 * var(--u));
+}
+
+/* Beat 1: large photo + small photo at the same height (the shared
+   large-photo height), each in its own proportions, with the caption
+   underneath, left-aligned. Sits near the top of its beat so there is little
+   empty space after the hero. */
+.exp-upper {
+  position: absolute;
+  left: calc(80 * var(--u));
+  top: calc(140 * var(--u));
+}
+.exp-upper__photos {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(14 * var(--u));
+}
+.exp-upper .brief__photo { height: var(--exp-pair-h); }
+.exp-upper .brief__photo img { display: block; width: auto; height: 100%; }
+.exp-upper__caption { margin-top: calc(24 * var(--u)); }
+
+/* Beat 2: same lower group, centred vertically in its own screen */
+.brief--exp .exp-lower {
+  bottom: auto;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Beat 2 (experiment): right-aligned row — caption on the left, photo on the
+   right at the same size as the beat-1 large photo (960 wide, 16:9), right
+   edge on the page gutter (same as the "PROJECTS" label), bottoms aligned. */
+.brief--exp .exp-lower {
+  left: auto;
+  right: calc(80 * var(--u));
+  flex-direction: row-reverse;   /* photo is first in the markup; show it on the right */
+  align-items: flex-end;         /* caption's last line sits on the photo's bottom edge */
+  gap: calc(40 * var(--u));
+}
+.brief--exp .exp-lower .brief__photo--lower {
+  /* 10% larger than the beat-1 large photo */
+  width: calc(var(--exp-pair-h) * 1400 / 787 * 1.1);
+  height: auto;
+  /* identical to the beat-1 large photo, which shows its 1400×787 (≈16:9) file uncropped */
+  aspect-ratio: 1400 / 787;
+}
+.brief--exp .exp-lower .brief__photo--lower img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Beat 2 (experiment): caption text right-aligned against the photo */
+.brief--exp .exp-lower .brief__text--side { text-align: right; }
+
+/* Beat 3 (experiment): menu + place cards at the shared large-photo height,
+   each in its own proportions, with two text blocks to the right. The whole
+   composition is centred in its screen as one unit. */
+.exp-third {
+  position: absolute;
+  left: 50%;
+  /* centred in its (75%-height) beat, which puts it about 12vh above the
+     screen's centre when the beat reaches the top of the screen */
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: flex-start;
+  gap: calc(80 * var(--u));
+}
+.exp-third__photos {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(14 * var(--u));
+  /* 6% larger than the shared large-photo height */
+  height: calc(var(--exp-large-h) * 1.06);
+}
+.exp-third__photo { height: 100%; }
+.exp-third__photo img { display: block; height: 100%; width: auto; }
+.exp-third__text {
+  /* narrowed so photos + text stay within the page margins */
+  width: calc(290 * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(40 * var(--u));
+  margin: 0;
+}
+.exp-third__label { font-weight: 700; }
+.exp-third__block dd { margin: calc(4 * var(--u)) 0 0; }
+
+/* Beat 4 (experiment): three photos side by side at the shared large-photo
+   height, each in its own proportions, centred in the beat as one row. */
+.exp-row {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: flex-start;
+  gap: calc(14 * var(--u));
+  height: var(--exp-large-h);
+}
+.exp-row__photo { height: 100%; }
+.exp-row__photo img { display: block; height: 100%; width: auto; }
+
+/* Beat 5 (experiment): behind-the-scenes gallery. Heading, photo row and
+   caption move as one unit: centred vertically in the beat, right edge on
+   the page gutter (so the group sits right of centre). Photos share one
+   height (400) in their own proportions. */
+.exp-gallery {
+  position: absolute;
+  right: calc(80 * var(--u));
+  top: 50%;
+  transform: translateY(-50%);
+}
+.exp-gallery__heading {
+  margin: 0 0 calc(10 * var(--u));
+  font-size: max(10px, 13 * var(--u));
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+}
+.exp-gallery__row {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(14 * var(--u));
+  /* 10% larger than the original 400 */
+  height: calc(440 * var(--u));
+}
+.exp-gallery__photo { height: 100%; }
+.exp-gallery__photo img { display: block; height: 100%; width: auto; }
+.exp-gallery__caption { margin-top: calc(24 * var(--u)); }
+.exp-gallery__caption p + p { margin-top: calc(4 * var(--u)); }
+
+/* Beat 5 sits lower so it stays fully hidden while the previous (75%-high)
+   beat is on screen: the previous beat leaves 25% of the screen below it, so
+   the gallery starts just past that. Space below matches the other beats. */
+.exp-beat--gallery {
+  height: auto;
+  display: flex;
+  justify-content: flex-end;
+  padding: calc(25vh + 24px) calc(80 * var(--u)) calc(37.5vh - 270 * var(--u));
+  padding: calc(25dvh + 24px) calc(80 * var(--u)) calc(37.5dvh - 270 * var(--u));
+}
+.exp-beat--gallery .exp-gallery {
+  position: static;
+  transform: none;
+}
+
+/* ---------- Experiment: equal spacing between sections ----------
+   The beats now stack in normal flow with exactly the same gap (250) between
+   one group's content and the next. The gap after the hero stays at 140, and
+   the last gap reaches the "In the Moment" kicker (its section has 62 of top
+   padding). Horizontal placement of each group is unchanged. */
+.brief--exp { --exp-gap: calc(200 * var(--u)); }  /* was 250 */
+.brief--exp .exp-beat {
+  height: auto;
+  display: flex;
+  padding: 0 calc(80 * var(--u));
+}
+.brief--exp .exp-beat + .exp-beat { margin-top: var(--exp-gap); }
+.brief--exp .exp-beat:first-child { padding-top: var(--exp-gap); }
+.brief--exp .exp-beat:last-child { padding-bottom: var(--exp-gap); }
+.brief--exp .exp-upper,
+.brief--exp .exp-lower,
+.brief--exp .exp-third,
+.brief--exp .exp-row,
+.brief--exp .exp-gallery {
+  position: static;
+  transform: none;
+}
+.brief--exp .exp-beat:nth-child(1) { justify-content: flex-start; }  /* left */
+.brief--exp .exp-beat:nth-child(2) { justify-content: flex-end; }    /* right */
+.brief--exp .exp-beat:nth-child(3),
+.brief--exp .exp-beat:nth-child(4) { justify-content: center; }     /* centred */
+.brief--exp .exp-beat:nth-child(5) { justify-content: flex-end; }    /* right */
+
+/* Beat 3: a second paragraph under a description, separated by one blank line */
+.exp-third__block dd.exp-third__note { margin-top: calc(1em * var(--caption-line-height)); }
+
+/* Hero titles too long for one line at 144: smaller (124) so they fit between
+   the margins, nudged down so their centre matches a 144 title's centre. */
+.hero__title--long {
+  font-size: calc(124 * var(--u));
+  top: calc((340 + (144 - 124) * 1.21 / 2) / 1117 * 100%);
+}
+
+/* Photo pair sized to exactly fill the space between the page margins:
+   height = (1568 − 14 gap) ÷ (3:2 ratio 1.5 + 16:9 ratio 1.779) ≈ 474 */
+.brief--exp .exp-upper--fit { --exp-pair-h: calc(474 * var(--u)); }
+
+/* Photo row with a caption beneath it, left-aligned with the row; the caption
+   wraps within the row's width instead of widening it. */
+.exp-stack { width: max-content; }
+.exp-stack__caption {
+  margin-top: calc(24 * var(--u));
+  width: 0;
+  min-width: 100%;
+}
+
+/* Two 3:2 photos sized to exactly fill the space between the page margins:
+   height = (1568 − 14 gap) ÷ (1.5 + 1.5) ≈ 518 */
+.brief--exp .exp-row--fit-pair { height: calc(518 * var(--u)); }
+
+/* Per-section alignment overrides (take priority over the default order) */
+.brief--exp .exp-beat.exp-beat--left { justify-content: flex-start; }
+.brief--exp .exp-beat.exp-beat--center { justify-content: center; }
+.brief--exp .exp-beat.exp-beat--right { justify-content: flex-end; }
+
+/* DC ensemble: Maggie-menu layout (80 gap, 290 text column) with the two 3:2
+   photos sized so photos + text fill the margins:
+   (1568 − 80 − 290 − 14) ÷ 3 ≈ 394.7 */
+/* Bigger photos: the text column is only as wide as its text, and the two
+   photos (same 3:2 shape, so equal widths = equal heights) fill the rest of
+   the width between the margins. Gap (80) and font size unchanged. */
+.brief--exp .exp-third--ensemble { width: calc(1568 * var(--u)); }
+.brief--exp .exp-third--ensemble .exp-third__photos { flex: 1; height: auto; min-width: 0; }
+.brief--exp .exp-third--ensemble .exp-third__photo { flex: 1; height: auto; min-width: 0; }
+.brief--exp .exp-third--ensemble .exp-third__photo img { width: 100%; height: auto; }
+/* Text column only as wide as the label; the description wraps under it,
+   giving the photos more room */
+.brief--exp .exp-third--ensemble .exp-third__text { width: min-content; flex: none; }
+.brief--exp .exp-third--ensemble .exp-third__label { white-space: nowrap; }
+
+/* Single photo at the same width as the Maggie page's second (enlarged) photo:
+   960 × 1.1 = 1056 wide, height from the photo's own shape */
+.brief--exp .exp-row--single-wide { height: auto; }
+.brief--exp .exp-row--single-wide .exp-row__photo {
+  width: var(--exp-large-w);   /* standard large-photo size: 960 × 540 */
+  height: auto;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+.brief--exp .exp-row--single-wide .exp-row__photo img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- End of page: link back to all projects ----------
+   Same size as the header; underline sweeps in on hover like the header links.
+   250 below the last section (or the hero on pages without sections). */
+.project-end {
+  display: flex;
+  justify-content: center;
+  padding: calc(250 * var(--u)) var(--gutter, calc(80 * var(--u))) calc(160 * var(--u));
+}
+.brief--exp + .project-end { padding-top: 0; }
+.project-end__link {
+  position: relative;
+  font-size: max(11px, 18 * var(--u));
+  line-height: 1.22;
+  white-space: nowrap;
+}
+.project-end__link::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: calc(-4 * var(--u));
+  height: 1px; background: currentColor;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 400ms cubic-bezier(.2, .7, .2, 1);
+}
+.project-end__link:hover::after,
+.project-end__link:focus-visible::after { transform: scaleX(1); }
+
+/* Three 3:2 photos filling the space between the margins:
+   height = (1568 − 2 × 14) ÷ (3 × 1.5) ≈ 342.2 */
+.brief--exp .exp-row--fit-three { height: calc(342.2 * var(--u)); }
+
+/* One large photo with two stacked beside it, filling the margins.
+   All 3:2: big width W, stacked photos each (H − 14) / 2 tall, so
+   W + 14 + 0.75 × (W / 1.5 − 14) = 1568  →  W ≈ 1043, H ≈ 695.3,
+   stacked ≈ 510.9 × 340.6 */
+.brief--exp .exp-mosaic {
+  display: grid;
+  grid-template-columns: calc(1043 * var(--u)) calc(510.9 * var(--u));
+  grid-template-rows: calc(340.6 * var(--u)) calc(340.6 * var(--u));
+  gap: calc(14 * var(--u));
+}
+.brief--exp .exp-mosaic .brief__photo { margin: 0; overflow: hidden; height: 100%; }
+.brief--exp .exp-mosaic__big { grid-row: 1 / span 2; }
+.brief--exp .exp-mosaic img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* Three photos in a row spanning the full screen width (no side margins);
+   each keeps its 3:2 shape */
+.brief--exp .exp-beat.exp-beat--bleed { padding-left: 0; padding-right: 0; }
+.brief--exp .exp-edge { display: flex; gap: calc(14 * var(--u)); width: 100%; }
+.brief--exp .exp-edge .brief__photo { flex: 1; min-width: 0; margin: 0; }
+.brief--exp .exp-edge img { display: block; width: 100%; height: auto; }
+
+/* Behind the scenes (DC): same overall width as Maggie's gallery (1282).
+   Big photo 1920×1276; stacked column width w holds 1527×1030 over 1780×883:
+   H = w/1.4825 + 14 + w/2.0159, big width = 1.5047·H, big + 14 + w = 1282
+   → w ≈ 451.6, H ≈ 542.6, big ≈ 816.4; stacked heights ≈ 304.6 and 224.0 */
+.brief--exp .exp-mosaic--bts {
+  grid-template-columns: calc(816.4 * var(--u)) calc(451.6 * var(--u));
+  grid-template-rows: calc(304.6 * var(--u)) calc(224 * var(--u));
+}
+
+/* DC planning documents: Maggie menu layout (80 gap, 290 text column), both
+   at one height so photos + text fill the margins:
+   (1568 − 80 − 290 − 14) ÷ (1527/1030 + 1780/883) ≈ 338.4 */
+/* Bigger: text column only as wide as its longest label (like the ensemble),
+   and the two photos share the rest of the width in proportion to their
+   shapes, so they stay the same height */
+.brief--exp .exp-third--docs { width: calc(1568 * var(--u)); }
+.brief--exp .exp-third--docs .exp-third__photos { flex: 1; height: auto; min-width: 0; }
+.brief--exp .exp-third--docs .exp-third__photo { flex: 1.4825 1 0; height: auto; min-width: 0; }
+.brief--exp .exp-third--docs .exp-third__photo + .exp-third__photo { flex: 2.0159 1 0; }
+.brief--exp .exp-third--docs .exp-third__photo img { width: 100%; height: auto; }
+/* Text column just wide enough that each description is at most 3 lines
+   (the shortened Guest List one needs ≥ 193; 205 leaves a little slack) */
+.brief--exp .exp-third--docs .exp-third__text { width: calc(205 * var(--u)); flex: none; }
+.brief--exp .exp-third--docs .exp-third__label { white-space: nowrap; }
+
+/* DC behind the scenes: single photo at the stack's former height */
+.brief--exp .exp-gallery__row--dc { height: calc(542.6 * var(--u)); }
+
+/* DC planning documents, captions beneath: the two photos share one height
+   and together fill the margins: (1568 − 14) ÷ (1527/1030 + 1780/883) ≈ 444.2.
+   Caption 24 below each photo, label → description 4 (as elsewhere). */
+.brief--exp .exp-docs { display: flex; align-items: flex-start; gap: calc(14 * var(--u)); width: calc(1568 * var(--u)); }
+.brief--exp .exp-docs__item { flex: 1.4825 1 0; min-width: 0; margin: 0; }
+.brief--exp .exp-docs__item + .exp-docs__item { flex: 2.0159 1 0; }
+.brief--exp .exp-docs__item img { display: block; width: 100%; height: auto; }
+.brief--exp .exp-docs__caption { margin-top: calc(24 * var(--u)); }
+.brief--exp .exp-docs__caption p + p { margin-top: calc(4 * var(--u)); }
+
+/* Captions stacked in one block beneath the pair: 24 below the photos,
+   40 between the two blocks (as in Maggie's text column), full width */
+.brief--exp .exp-docs__text { width: auto; margin-top: calc(24 * var(--u)); }
+
+/* DC behind the scenes: two photos side by side at Maggie's gallery height
+   (440), each in its own proportions, caption 24 beneath each photo and
+   wrapping to the photo's width */
+.brief--exp .exp-bts { display: flex; align-items: flex-start; gap: calc(14 * var(--u)); }
+.brief--exp .exp-bts__item { margin: 0; width: min-content; }
+.brief--exp .exp-bts__item img { display: block; height: calc(440 * var(--u)); width: auto; max-width: none; }
+.brief--exp .exp-bts__caption { margin-top: calc(24 * var(--u)); }
+.brief--exp .exp-bts__caption p + p { margin-top: calc(4 * var(--u)); }
+
+/* DC ensemble, caption beneath: two 3:2 photos 10% larger than before
+   (677 → 745 wide each), caption 24 below */
+.brief--exp .exp-ensemble { display: flex; gap: calc(14 * var(--u)); }
+.brief--exp .exp-ensemble .brief__photo { margin: 0; width: calc(745 * var(--u)); }
+.brief--exp .exp-ensemble img { display: block; width: 100%; height: auto; }
+
+/* DC behind the scenes, captions to the right: text column as wide as its
+   longest label; the two photos (1920×1276, 2560×1707) share the rest of the
+   width between the margins in proportion to their shapes, so they stay one
+   height. Gap to text 80, as in Maggie's menu section. */
+/* Slightly bigger photos: gap to the text 40 (as with Maggie's florals
+   caption) instead of 80 */
+.brief--exp .exp-third--bts { width: calc(1568 * var(--u)); gap: calc(40 * var(--u)); }
+.brief--exp .exp-third--bts .exp-third__photos { flex: 1; height: auto; min-width: 0; }
+.brief--exp .exp-third--bts .exp-third__photo { flex: 1.5047 1 0; height: auto; min-width: 0; }
+.brief--exp .exp-third--bts .exp-third__photo + .exp-third__photo { flex: 1.4997 1 0; }
+.brief--exp .exp-third--bts .exp-third__photo img { width: 100%; height: auto; }
+/* Column wide enough that each description stays within 3 lines (the
+   nametag one needs ≥ 210; 215 leaves a little slack) */
+.brief--exp .exp-third--bts .exp-third__text { width: calc(215 * var(--u)); flex: none; }
+.brief--exp .exp-third--bts .exp-third__label { white-space: nowrap; }
+
+/* DC planning documents: italic privacy note under both captions, separated
+   by one blank line (as with the second paragraph in Maggie's menu text) */
+.brief--exp .exp-docs__note { margin-top: calc(1em * var(--caption-line-height)); font-style: italic; }
+
+/* Single photo at the shared large-photo width (960), in its own proportions */
+.brief--exp .exp-single { margin: 0; width: var(--exp-large-w); height: auto; }
+.brief--exp .exp-single img { display: block; width: 100%; height: auto; }
+.exp-stack__caption p + p { margin-top: calc(4 * var(--u)); }
+
+/* Two photos side by side at one height, each in its own proportions:
+   the same height as Maggie's first section (the shared large-photo height,
+   so a 16:9 photo is 960 wide) */
+.brief--exp .exp-duo { display: flex; align-items: flex-start; gap: calc(14 * var(--u)); height: var(--exp-large-h); }
+
+/* Photo centred on the page with its caption to the right: three columns, the
+   photo in the middle, caption 80 from the photo and top-aligned with it
+   (Maggie's menu spacing and 290 text column). Photo at the shared
+   large-photo height. */
+.brief--exp .exp-centred {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: start;
+  width: calc(1568 * var(--u));
+}
+.brief--exp .exp-centred__photo { grid-column: 2; height: var(--exp-large-h); }
+.brief--exp .exp-centred__photo img { display: block; height: 100%; width: auto; }
+.brief--exp .exp-centred__text { grid-column: 3; margin: 0 0 0 calc(80 * var(--u)); width: calc(290 * var(--u)); }
+
+/* Single photo with text to the right, photo at the shared large-photo height */
+.brief--exp .exp-third--single .exp-third__photos { height: var(--exp-large-h); }
+
+/* Single photo at the shared large-photo height, caption beneath */
+.brief--exp .exp-stack__photo { margin: 0; height: var(--exp-large-h); }
+.brief--exp .exp-stack__photo img { display: block; height: 100%; width: auto; }
+
+/* Charcuterie (Rebecca): text column takes all the width left between the
+   photo and the right margin instead of 290, so the description runs on one
+   line (needs ≈ 704). Gap to the photo 40 (as with the florals caption),
+   leaving 1568 − 809 − 40 ≈ 719 for the text. */
+.brief--exp .exp-third--wide-text { width: calc(1568 * var(--u)); gap: calc(40 * var(--u)); }
+.brief--exp .exp-third--wide-text .exp-third__text { flex: 1; min-width: 0; width: auto; }
+
+/* Rebecca guests: 3:4 photo (540 × 720) beside two stacked 3:2 photos
+   (529.5 × 353 each; 353 + 14 + 353 = 720), all in their own proportions */
+.brief--exp .exp-mosaic--guests {
+  grid-template-columns: calc(540 * var(--u)) calc(529.5 * var(--u));
+  grid-template-rows: calc(353 * var(--u)) calc(353 * var(--u));
+}
+
+/* Photos side by side at the shared large-photo height, each in its own
+   proportions, caption 24 beneath each and wrapping to that photo's width */
+/* 80 between the two (the spacing used between a photo and its side text),
+   so each photo reads with its own caption */
+.brief--exp .exp-captioned { display: flex; align-items: flex-start; gap: calc(80 * var(--u)); }
+.brief--exp .exp-captioned__item { margin: 0; height: auto; width: min-content; }
+.brief--exp .exp-captioned__item img { display: block; height: var(--exp-large-h); width: auto; max-width: none; }
+.brief--exp .exp-captioned__caption { margin-top: calc(24 * var(--u)); }
+.brief--exp .exp-captioned__caption p + p { margin-top: calc(4 * var(--u)); }
+
+/* Rebecca invitation + charcuterie with captions stacked to the right:
+   Maggie menu spacing (14 between photos, 80 to the text, 290 column), photos
+   at one height so everything fills the margins:
+   (1568 − 14 − 80 − 290) ÷ (1197/1196 + 1288/859) ≈ 473.6 */
+.brief--exp .exp-third--pairtext .exp-third__photos { height: calc(473.6 * var(--u)); }
+
+/* Slight zoom anchored bottom-left, hiding a thin white wedge in the photo's
+   top-right corner (left over from straightening); frame size unchanged */
+.exp-photo--zoom { overflow: hidden; }
+.exp-photo--zoom img { transform: scale(1.03); transform-origin: 0 100%; }
+
+/* Rebecca behind the scenes: two tasks side by side, 40 apart (photos within a
+   task 14 apart), all photos one height so the row exactly fills the margins:
+   3:2 + 3:4 + 3:2 → (1568 − 14 − 40) ÷ (1.5 + 0.75 + 1.5) ≈ 403.7 */
+.brief--exp .exp-bts-tasks { display: flex; align-items: flex-start; gap: calc(40 * var(--u)); }
+.brief--exp .exp-bts-task .exp-gallery__row { height: calc(403.7 * var(--u)); }
+.brief--exp .exp-bts-task { width: min-content; }
+/* Sized from the real width between the margins (cq units on the gallery,
+   which spans the beat's content box), so on screens wider than the design's
+   shape the row still reaches the right margin instead of leaving space */
+.brief--exp .exp-gallery:has(.exp-bts-tasks) { width: 100%; container-type: inline-size; }
+.brief--exp .exp-bts-task .exp-gallery__row { height: calc((100cqw - 54 * var(--u)) / 3.75); }
+
+/* Fiona menus: Maggie menu layout (80 gap, 290 text column); drafts (2000×1545)
+   and two menus (1294×2000) at one height so photos + text fill the margins:
+   (1568 − 80 − 290 − 2 × 14) ÷ (2000/1545 + 2 × 1294/2000) ≈ 452 */
+.brief--exp .exp-third--menus .exp-third__photos { height: calc(452 * var(--u)); }
+
+/* Fiona atmosphere: Maggie's three-photo row, sized to fill the margins:
+   two 3:2 photos and one 3:4, height = (1568 − 2 × 14) ÷ (1.5 + 0.75 + 1.5) ≈ 410.7 */
+.brief--exp .exp-row--fit-atmos { height: calc(410.7 * var(--u)); }
+
+/* Fiona behind the scenes: two tasks 40 apart, one photo each, at Maggie's
+   gallery height (440); the group sits at its own width so it can align right */
+.brief--exp .exp-gallery:has(.exp-bts-tasks--fiona) { width: auto; container-type: normal; }
+.brief--exp .exp-bts-tasks--fiona .exp-gallery__row { height: calc(440 * var(--u)); }
+
+/* Pages with no sections yet: the end link sits the usual section gap (200)
+   below the hero, as it does below the last section on the other pages */
+.hero + .project-end { padding-top: calc(200 * var(--u)); }
+
+/* Titles too long even at 124 (THE DINNER TABLE PODCAST): 112, nudged down so
+   their centre matches a 144 title's centre */
+.hero__title--longer {
+  font-size: calc(112 * var(--u));
+  top: calc((340 + (144 - 112) * 1.21 / 2) / 1117 * 100%);
+}
+
+/* All Alone recognition: poster at the shared large-photo height (as Rebecca's
+   invitation), text column as wide as its longest line so each award is one line */
+.brief--exp .exp-third--awards .exp-third__text { width: max-content; }
+/* Poster larger: 720 tall, the height of the tallest photos elsewhere
+   (Rebecca's guests mosaic) */
+.brief--exp .exp-third--awards .exp-third__photos { height: calc(720 * var(--u)); }
+/* Recognition text sits at the poster's bottom edge */
+.brief--exp .exp-third--awards { align-items: flex-end; }
+
+/* All Alone call sheet: both pages side by side at the poster's height (720) */
+.brief--exp .exp-duo--callsheet { height: calc(720 * var(--u)); }
+.brief--exp .exp-duo--callsheet img { box-shadow: 0 0 0 1px rgba(33, 31, 28, 0.12); }
+
+/* All Alone behind the scenes: three photos (4:3, 4:3, 16:9) at one height,
+   filling the margins: (1568 − 2 × 14) ÷ (4/3 + 4/3 + 3336/1876) ≈ 346.5 */
+.brief--exp .exp-gallery__row--aa { height: calc(346.5 * var(--u)); }
+
+/* Dinner Table logo: square at the shared large-photo height, caption beneath */
+.brief--exp .exp-logo { margin: 0; width: var(--exp-large-h); height: var(--exp-large-h); }
+.brief--exp .exp-logo img { display: block; width: 100%; height: 100%; }
+
+/* Dinner Table: Spotify show player in its own section, as wide as the row
+   of episode posts (three 4:5 posts at the shared large-photo height + two
+   14 gaps). Height stays at Spotify's 352px layout (it switches layouts by
+   pixel height, so it isn't scaled with --u). */
+.brief--exp .exp-embed {
+  display: block;
+  flex: none;
+  width: calc(var(--exp-large-h) * 2.4 + 28 * var(--u));
+  height: 352px;
+  border: 0;
+  border-radius: 12px;
+}
+
+/* Three 3:2 photos in a gallery row, filling the margins (as exp-row--fit-three):
+   (1568 − 2 × 14) ÷ (3 × 1.5) ≈ 342.2 */
+.brief--exp .exp-gallery__row--fit-three { height: calc(342.2 * var(--u)); }
+/* Sized from the real width between the margins (as Rebecca's BTS), so wider
+   or shorter screens don't leave space on the right */
+.brief--exp .exp-gallery:has(.exp-gallery__row--fit-three) { width: 100%; container-type: inline-size; }
+.brief--exp .exp-gallery__row--fit-three { height: calc((100cqw - 28 * var(--u)) / 4.5); }
+
+/* All Alone stills: two per row filling the margins, every frame the same
+   size (2880×1210 widescreen; the two narrower-cropped stills are trimmed to
+   match). An odd last still sits centred on its own row. */
+.brief--exp .exp-stills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: calc(14 * var(--u));
+  width: 100%;
+}
+.brief--exp .exp-stills .brief__photo {
+  margin: 0;
+  width: calc((100% - 14 * var(--u)) / 2);
+  height: auto;
+  aspect-ratio: 2880 / 1210;
+  overflow: hidden;
+}
+.brief--exp .exp-stills img { display: block; width: 100%; height: 100%; object-fit: cover; }

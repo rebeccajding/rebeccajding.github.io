@@ -1,0 +1,203 @@
+:root {
+  --paper: #f6f4f0;
+  --ink: #211f1c;
+  --monogram-ink: #1f1c1a;
+  --label-ink: #1a1721;
+  --muted-text: #5c574f;
+  --subtle-overlay: rgba(33, 31, 28, 0.12);
+
+  --maggie: #1a1721;
+  --daily-californian: #242335;
+  --rebecca: #481a1a;
+  --fiona: #2e2419;
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  --font-script: 'Island Moments', 'Snell Roundhand', 'Apple Chancery', cursive;
+
+  /*
+    One Figma pixel. The whole composition scales from the 1728×1117 frame,
+    limited by whichever viewport axis is tighter, so proportions match Figma.
+  */
+  --u: min(100vw / 1728, 100dvh / 1117);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+ol, ul { list-style: none; }
+img { display: block; }
+:focus-visible { outline: 1px solid currentColor; outline-offset: calc(6 * var(--u)); }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+
+/* ---------- Full-screen, no vertical scrolling ---------- */
+.landing {
+  position: relative;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+/* ---------- Header (stationary) ---------- */
+.header {
+  position: fixed;
+  z-index: 3;
+  top: calc(58 * var(--u));
+  left: calc(80 * var(--u));
+  right: calc(150 * var(--u));
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  /* same size as the bottom statement */
+  font-size: max(10px, 15 * var(--u));
+  line-height: 1.2;
+}
+.header__nav { display: flex; gap: calc(96 * var(--u)); }
+.header a { position: relative; }
+.header a::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: calc(-4 * var(--u));
+  height: 1px; background: currentColor;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 400ms cubic-bezier(.2, .7, .2, 1);
+}
+.header a:hover::after { transform: scaleX(1); }
+
+/* ---------- R monogram (stationary, above the track) ---------- */
+.monogram {
+  position: fixed;
+  z-index: 2;
+  left: calc(155 * var(--u));
+  top: calc(50dvh - 38.5 * var(--u));
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: calc(72 * var(--u));
+  line-height: 1.15;
+  /*
+    Difference blending: on the paper background this renders exactly
+    #1f1c1a (#f6f4f0 − #d7d8d6), and it turns light over dark photographs
+    so the R stays legible as cards pass underneath.
+  */
+  color: #d7d8d6;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ---------- Horizontal track ---------- */
+.track {
+  /* size of the project section relative to Figma (1 = 100%) */
+  --s: 0.94;
+  /* fraction of the Rebecca image visible on load */
+  --peek: 0.25;
+  position: fixed;
+  z-index: 1;
+  inset: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+.track::-webkit-scrollbar { display: none; }
+.track:focus-visible { outline: none; }
+
+.track__list {
+  display: flex;
+  align-items: flex-start;
+  width: max-content;
+  height: 100%;
+  /* card stack (358 + 26 + 39 + 23 + 18 = 464) sits 31px below centre in Figma */
+  padding-top: calc(50dvh - 201 * var(--s) * var(--u));
+  /*
+    Anchored to the viewport's right edge so exactly --peek of Rebecca (the
+    third card) shows at any window size:
+    Maggie 269 + gap 62.87 + DC 269 + gap 72.6 = 673.47
+  */
+  padding-left: calc(100vw - (673.47 + 269 * var(--peek)) * var(--s) * var(--u));
+  /*
+    Scrolling stops when the last card's (Fiona's) left edge reaches 76% of
+    the viewport, so the track stops sooner.
+    24vw − (last card 269·s + gap 25.5·s + link ≈ 114)
+  */
+  padding-right: calc(24vw - 2px - (114 + 294.5 * var(--s)) * var(--u));
+}
+.track__item + .track__item { margin-left: calc(var(--gap, 63) * var(--s) * var(--u)); }
+
+/* ---------- Project card ---------- */
+/* One shared size for every card: Figma's 269px-wide frame at a 3:4 ratio */
+.card { width: calc(269 * var(--s) * var(--u)); will-change: opacity; }
+.card__link { display: block; }
+.card__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: #e4e0d8;
+}
+.card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+/* Figma overlay on every photo: #211F1C at 12%, above the image only */
+.card__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--subtle-overlay);
+  pointer-events: none;
+}
+.card__bar {
+  display: block;
+  height: calc(39 * var(--s) * var(--u));
+  margin-top: calc(26 * var(--s) * var(--u));
+  background: var(--bar);
+}
+.card__label {
+  display: block;
+  margin-top: calc(23 * var(--s) * var(--u));
+  padding-left: calc(8 * var(--s) * var(--u));
+  font-size: max(10px, 15 * var(--s) * var(--u));
+  line-height: 1.2;
+  color: var(--label-ink);
+  white-space: nowrap;
+}
+.card__link:focus-visible { outline-offset: calc(10 * var(--u)); }
+
+/* ---------- End of track ---------- */
+.track__end {
+  /* Figma: x 1521, y 559 → 202px below the top of the images */
+  padding-top: calc(202 * var(--s) * var(--u));
+  font-size: max(9px, 11 * var(--u));
+  line-height: 1.2;
+  color: var(--muted-text);
+  white-space: nowrap;
+}
+.track__end a:hover { color: var(--ink); }
+
+/* ---------- Bottom statement (stationary) ---------- */
+.statement {
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: calc(39 * var(--u));
+  text-align: center;
+  font-size: max(10px, 15 * var(--u));
+  line-height: 1.2;
+  pointer-events: none;
+}

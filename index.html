@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rebecca — Events &amp; Experiences</title>
+  <meta name="description" content="Rebecca Ding — events and experiences, from concept to execution.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Island+Moments&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="landing">
+
+  <header class="header">
+    <a class="header__brand" href="/">REBECCA</a>
+    <nav aria-label="Main">
+      <ul class="header__nav">
+        <li><a href="/projects">PROJECTS</a></li>
+        <!-- Parked for now (page saved in /Portfolio/parked/about): <li><a href="/about">ABOUT</a></li> -->
+        <!-- Parked for now (page saved in /Portfolio/parked/contact): <li><a href="/contact">CONTACT</a></li> -->
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1 class="visually-hidden">Rebecca Ding — selected projects</h1>
+
+    <span class="monogram" aria-hidden="true">R</span>
+
+    <!--
+      Every card shares one size (a 3:4 photo frame + colour bar), set in
+      styles.css. Photos are pre-cropped to 3:4, so no per-image cropping.
+      Per card: --bar (colour bar) and --gap (space before it, in Figma px).
+    -->
+    <div class="track" tabindex="0" role="region" aria-label="Featured projects. Scroll horizontally.">
+      <ol class="track__list">
+        <li class="track__item card" style="--bar: var(--maggie);">
+          <a class="card__link" href="/projects/maggie" aria-label="Maggie — view project">
+            <span class="card__media">
+              <img src="/images/projects/maggie/landing.jpg" width="900" height="1200"
+                   alt="Guests at a long candlelit garden table under a tree hung with stars">
+            </span>
+            <span class="card__bar" aria-hidden="true"></span>
+            <span class="card__label">01- MAGGIE</span>
+          </a>
+        </li>
+        <li class="track__item card" style="--bar: var(--daily-californian); --gap: 62.87;">
+          <a class="card__link" href="/projects/daily-californian" aria-label="The Daily Californian — view project">
+            <span class="card__media">
+              <img src="/images/projects/daily-californian/landing.jpg" width="900" height="1199"
+                   alt="A speaker at a podium in front of a UC Berkeley Graduate School of Journalism backdrop">
+            </span>
+            <span class="card__bar" aria-hidden="true"></span>
+            <span class="card__label">02- THE DAILY CALIFORNIAN</span>
+          </a>
+        </li>
+        <li class="track__item card" style="--bar: var(--rebecca); --gap: 72.6;">
+          <a class="card__link" href="/projects/rebecca" aria-label="Rebecca — view project">
+            <span class="card__media">
+              <img src="/images/projects/rebecca/landing.jpg" width="900" height="1200"
+                   alt="A frosted cake, flowers, wine and a charcuterie board on a kitchen counter">
+            </span>
+            <span class="card__bar" aria-hidden="true"></span>
+            <span class="card__label">03- REBECCA</span>
+          </a>
+        </li>
+        <li class="track__item card" style="--bar: var(--fiona); --gap: 72.6;">
+          <a class="card__link" href="/projects/fiona" aria-label="Fiona — view project">
+            <span class="card__media">
+              <img src="/images/projects/fiona/landing.jpg" width="620" height="826"
+                   alt="Guests around a candlelit dinner table set with white flowers and wine">
+            </span>
+            <span class="card__bar" aria-hidden="true"></span>
+            <span class="card__label">04- FIONA</span>
+          </a>
+        </li>
+        <li class="track__item track__end" style="--gap: 25.5;">
+          <a href="/projects">SCROLL TO EXPLORE</a>
+        </li>
+      </ol>
+    </div>
+  </main>
+
+  <p class="statement">FROM CONCEPT TO EXECUTION</p>
+
+  <script src="/landing.js"></script>
+</body>
+</html>
