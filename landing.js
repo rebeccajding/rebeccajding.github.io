@@ -80,19 +80,20 @@
   });
 
   // Every card fades with the same function, based only on where its left
-  // edge sits in the viewport. The fade begins at the spot where Maggie (the
-  // first card) sits on load, so she starts fading with the first bit of
-  // scroll, and ends at 35% of the viewport width (linear in between).
+  // edge sits in the viewport. The fade begins 20% of the viewport width left
+  // of where Maggie (the first card) sits on load, and ends at 15% of the
+  // viewport width (linear in between), clear of the R.
   // Every card uses these same two thresholds.
-  const FADE_END = 0.35;
+  const FADE_END = 0.15;
+  const FADE_START_OFFSET = 0.20;
   const cards = [...track.querySelectorAll('.card')];
-  let fadeStart = 0.60;
+  let fadeStart = 0.40;
   let fadeQueued = false;
 
   function measureFadeStart() {
     // Maggie's left edge at scroll position 0, as a fraction of the viewport.
     const left = cards[0].getBoundingClientRect().left + track.scrollLeft;
-    fadeStart = left / window.innerWidth;
+    fadeStart = left / window.innerWidth - FADE_START_OFFSET;
   }
 
   function cardOpacity(left, viewportWidth) {

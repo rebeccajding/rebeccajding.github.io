@@ -127,11 +127,11 @@ img { display: block; }
   */
   padding-left: calc(100vw - (673.47 + 269 * var(--peek)) * var(--s) * var(--u));
   /*
-    Scrolling stops when the last card's (Fiona's) left edge reaches 76% of
-    the viewport, so the track stops sooner.
-    24vw − (last card 269·s + gap 25.5·s + link ≈ 114)
+    Scrolling stops when the last card's (Fiona's) left edge reaches 55% of
+    the viewport, so it can travel almost to the middle.
+    45vw − (last card 269·s + gap 25.5·s + link ≈ 114)
   */
-  padding-right: calc(24vw - 2px - (114 + 294.5 * var(--s)) * var(--u));
+  padding-right: calc(45vw - 2px - (114 + 294.5 * var(--s)) * var(--u));
 }
 .track__item + .track__item { margin-left: calc(var(--gap, 63) * var(--s) * var(--u)); }
 
