@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,400&display=swap">
-  <link rel="stylesheet" href="/styles.css?v=mob1">
+  <link rel="stylesheet" href="/styles.css?v=mob3">
   <link rel="stylesheet" href="/projects/project.css?v=pe58">
 </head>
 <body class="page-project">
@@ -25,8 +25,12 @@
   <main>
     <!-- Same hero as the live-event pages. Photo from E-DTP/Hero.jpg. -->
     <section class="hero" aria-labelledby="project-title">
-      <img class="hero__img" src="/images/projects/the-dinner-table-podcast/hero.jpg" width="1308" height="736"
-           style="--focus: 50% 100%;" alt="A red vinyl record spinning on a turntable, the tonearm resting on it and the cream label at the bottom" fetchpriority="high">
+      <picture>
+        <source type="image/webp" srcset="/images/projects/the-dinner-table-podcast/hero-480.webp 480w, /images/projects/the-dinner-table-podcast/hero-800.webp 800w, /images/projects/the-dinner-table-podcast/hero-1200.webp 1200w"
+                sizes="(max-width: 760px) max(100vw, calc(1.777 * max(100vh, 1001px))), max(100vw, calc(1.777 * 100vh))">
+        <img class="hero__img" src="/images/projects/the-dinner-table-podcast/hero.jpg" width="1308" height="736"
+             style="--focus: 50% 100%;" alt="A red vinyl record spinning on a turntable, the tonearm resting on it and the cream label at the bottom" fetchpriority="high">
+      </picture>
       <div class="hero__overlay" aria-hidden="true"></div>
       <h1 class="hero__title hero__title--longer" id="project-title">THE DINNER TABLE PODCAST</h1>
       <dl class="hero__details">
@@ -45,8 +49,12 @@
       <div class="exp-beat exp-beat--center">
         <div class="exp-stack">
           <figure class="brief__photo exp-logo">
-            <img src="/images/projects/the-dinner-table-podcast/logo.jpg" width="2000" height="2000"
-                 alt="The Dinner Table podcast logo: the title in deep red serif lettering between two hands raising cocktail glasses with cherries, credited to Rebecca Ding and Carolyn Yu" loading="lazy">
+            <picture>
+              <source type="image/webp" srcset="/images/projects/the-dinner-table-podcast/logo-480.webp 480w, /images/projects/the-dinner-table-podcast/logo-800.webp 800w, /images/projects/the-dinner-table-podcast/logo-1200.webp 1200w, /images/projects/the-dinner-table-podcast/logo-1600.webp 1600w, /images/projects/the-dinner-table-podcast/logo-2000.webp 2000w"
+                      sizes="(max-width: 760px) calc(100vw - 40px), 31.3vw">
+              <img src="/images/projects/the-dinner-table-podcast/logo.jpg" width="2000" height="2000"
+                   alt="The Dinner Table podcast logo: the title in deep red serif lettering between two hands raising cocktail glasses with cherries, credited to Rebecca Ding and Carolyn Yu" loading="lazy">
+            </picture>
           </figure>
           <p class="caption exp-stack__caption">Designed podcast's logo.</p>
         </div>
@@ -58,16 +66,28 @@
         <div class="exp-stack">
           <div class="exp-row">
             <figure class="brief__photo exp-row__photo">
-              <img src="/images/projects/the-dinner-table-podcast/post-1.jpg" width="1080" height="1350"
-                   alt="Episode post for “fat elephants, blinded ducks, baseball”: women sunbathing on towels, white sand and a pool with striped floats" loading="lazy">
+              <picture>
+                <source type="image/webp" srcset="/images/projects/the-dinner-table-podcast/post-1-480.webp 480w, /images/projects/the-dinner-table-podcast/post-1-800.webp 800w, /images/projects/the-dinner-table-podcast/post-1-1080.webp 1080w"
+                        sizes="(max-width: 760px) calc(100vw - 40px), 25vw">
+                <img src="/images/projects/the-dinner-table-podcast/post-1.jpg" width="1080" height="1350"
+                     alt="Episode post for “fat elephants, blinded ducks, baseball”: women sunbathing on towels, white sand and a pool with striped floats" loading="lazy">
+              </picture>
             </figure>
             <figure class="brief__photo exp-row__photo">
-              <img src="/images/projects/the-dinner-table-podcast/post-2.jpg" width="1080" height="1350"
-                   alt="Episode post for “out of sight, never out of sync”: silver tableware on a red cloth, white satin and cherries hung on a string" loading="lazy">
+              <picture>
+                <source type="image/webp" srcset="/images/projects/the-dinner-table-podcast/post-2-480.webp 480w, /images/projects/the-dinner-table-podcast/post-2-800.webp 800w, /images/projects/the-dinner-table-podcast/post-2-1080.webp 1080w"
+                        sizes="(max-width: 760px) calc(100vw - 40px), 25vw">
+                <img src="/images/projects/the-dinner-table-podcast/post-2.jpg" width="1080" height="1350"
+                     alt="Episode post for “out of sight, never out of sync”: silver tableware on a red cloth, white satin and cherries hung on a string" loading="lazy">
+              </picture>
             </figure>
             <figure class="brief__photo exp-row__photo">
-              <img src="/images/projects/the-dinner-table-podcast/post-3.jpg" width="1080" height="1350"
-                   alt="Episode post for “lights, camera, action – our top films of all time”: a turntable, film stills and magazine cut-outs" loading="lazy">
+              <picture>
+                <source type="image/webp" srcset="/images/projects/the-dinner-table-podcast/post-3-480.webp 480w, /images/projects/the-dinner-table-podcast/post-3-800.webp 800w, /images/projects/the-dinner-table-podcast/post-3-1080.webp 1080w"
+                        sizes="(max-width: 760px) calc(100vw - 40px), 25vw">
+                <img src="/images/projects/the-dinner-table-podcast/post-3.jpg" width="1080" height="1350"
+                     alt="Episode post for “lights, camera, action – our top films of all time”: a turntable, film stills and magazine cut-outs" loading="lazy">
+              </picture>
             </figure>
           </div>
           <p class="caption exp-stack__caption">Episode alert graphics designed for each release.</p>
@@ -80,16 +100,28 @@
           <h2 class="exp-gallery__heading">BEHIND THE SCENES</h2>
           <div class="exp-gallery__row exp-gallery__row--fit-three">
             <figure class="brief__photo exp-gallery__photo">
-              <img src="/images/projects/the-dinner-table-podcast/bts-1.jpg" width="1800" height="1200"
-                   alt="The two co-hosts recording on a sofa, holding phones as microphones, with a laptop on the table between them" loading="lazy">
+              <picture>
+                <source type="image/webp" srcset="/images/projects/the-dinner-table-podcast/bts-1-480.webp 480w, /images/projects/the-dinner-table-podcast/bts-1-800.webp 800w, /images/projects/the-dinner-table-podcast/bts-1-1200.webp 1200w, /images/projects/the-dinner-table-podcast/bts-1-1600.webp 1600w, /images/projects/the-dinner-table-podcast/bts-1-1800.webp 1800w"
+                        sizes="(max-width: 760px) calc(100vw - 40px), 31vw">
+                <img src="/images/projects/the-dinner-table-podcast/bts-1.jpg" width="1800" height="1200"
+                     alt="The two co-hosts recording on a sofa, holding phones as microphones, with a laptop on the table between them" loading="lazy">
+              </picture>
             </figure>
             <figure class="brief__photo exp-gallery__photo">
-              <img src="/images/projects/the-dinner-table-podcast/bts-2.jpg" width="1800" height="1200"
-                   alt="One co-host listening while the other talks into her phone during a recording" loading="lazy">
+              <picture>
+                <source type="image/webp" srcset="/images/projects/the-dinner-table-podcast/bts-2-480.webp 480w, /images/projects/the-dinner-table-podcast/bts-2-800.webp 800w, /images/projects/the-dinner-table-podcast/bts-2-1200.webp 1200w, /images/projects/the-dinner-table-podcast/bts-2-1600.webp 1600w, /images/projects/the-dinner-table-podcast/bts-2-1800.webp 1800w"
+                        sizes="(max-width: 760px) calc(100vw - 40px), 31vw">
+                <img src="/images/projects/the-dinner-table-podcast/bts-2.jpg" width="1800" height="1200"
+                     alt="One co-host listening while the other talks into her phone during a recording" loading="lazy">
+              </picture>
             </figure>
             <figure class="brief__photo exp-gallery__photo">
-              <img src="/images/projects/the-dinner-table-podcast/bts-3.jpg" width="1800" height="1200"
-                   alt="One co-host mid-story, gesturing, while the other records on her phone" loading="lazy">
+              <picture>
+                <source type="image/webp" srcset="/images/projects/the-dinner-table-podcast/bts-3-480.webp 480w, /images/projects/the-dinner-table-podcast/bts-3-800.webp 800w, /images/projects/the-dinner-table-podcast/bts-3-1200.webp 1200w, /images/projects/the-dinner-table-podcast/bts-3-1600.webp 1600w, /images/projects/the-dinner-table-podcast/bts-3-1800.webp 1800w"
+                        sizes="(max-width: 760px) calc(100vw - 40px), 31vw">
+                <img src="/images/projects/the-dinner-table-podcast/bts-3.jpg" width="1800" height="1200"
+                     alt="One co-host mid-story, gesturing, while the other records on her phone" loading="lazy">
+              </picture>
             </figure>
           </div>
         </div>

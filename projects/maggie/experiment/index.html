@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/styles.css?v=mob3">
   <link rel="stylesheet" href="/projects/project.css?v=pe58">
 </head>
 <body class="page-project">
@@ -25,8 +25,12 @@
   <main>
     <!-- Generated from the Figma "Project Introduction" frame; copy is verbatim. -->
     <section class="hero" aria-labelledby="project-title">
-      <img class="hero__img" src="/images/projects/maggie/hero.jpg" width="2000" height="2666"
-           style="--focus: 50% 64%;" alt="Guests at a long candlelit garden table under a tree hung with stars and string lights" fetchpriority="high">
+      <picture>
+        <source type="image/webp" srcset="/images/projects/maggie/hero-480.webp 480w, /images/projects/maggie/hero-800.webp 800w, /images/projects/maggie/hero-1200.webp 1200w, /images/projects/maggie/hero-1600.webp 1600w, /images/projects/maggie/hero-2000.webp 2000w"
+                sizes="(max-width: 760px) max(100vw, calc(0.750 * max(100vh, 1014px))), max(100vw, calc(0.750 * 100vh))">
+        <img class="hero__img" src="/images/projects/maggie/hero.jpg" width="2000" height="2666"
+             style="--focus: 50% 64%;" alt="Guests at a long candlelit garden table under a tree hung with stars and string lights" fetchpriority="high">
+      </picture>
       <div class="hero__overlay" aria-hidden="true"></div>
       <h1 class="hero__title" id="project-title">MAGGIE</h1>
       <dl class="hero__details">
@@ -47,12 +51,20 @@
         <div class="exp-upper">
           <div class="exp-upper__photos">
             <figure class="brief__photo exp-upper__large">
-              <img src="/images/projects/maggie/c1-1.jpg?v=2" width="1400" height="787"
-                   alt="An illustrated menu card on a plate beside a glass jar, folded napkin, candle and a bowl of red and pink roses">
+              <picture>
+                <source type="image/webp" srcset="/images/projects/maggie/c1-1-480.webp 480w, /images/projects/maggie/c1-1-800.webp 800w, /images/projects/maggie/c1-1-1200.webp 1200w, /images/projects/maggie/c1-1-1400.webp 1400w"
+                        sizes="(max-width: 760px) calc(100vw - 40px), 55.6vw">
+                <img src="/images/projects/maggie/c1-1.jpg?v=2" width="1400" height="787"
+                     alt="An illustrated menu card on a plate beside a glass jar, folded napkin, candle and a bowl of red and pink roses" loading="lazy">
+              </picture>
             </figure>
             <figure class="brief__photo exp-upper__small">
-              <img src="/images/projects/maggie/c1-2.jpg?v=2" width="1120" height="1400"
-                   alt="A long candlelit table with wine on ice, a fruit platter, illustrated menu cards and folded napkins">
+              <picture>
+                <source type="image/webp" srcset="/images/projects/maggie/c1-2-480.webp 480w, /images/projects/maggie/c1-2-800.webp 800w, /images/projects/maggie/c1-2-1120.webp 1120w"
+                        sizes="(max-width: 760px) calc(100vw - 40px), 25vw">
+                <img src="/images/projects/maggie/c1-2.jpg?v=2" width="1120" height="1400"
+                     alt="A long candlelit table with wine on ice, a fruit platter, illustrated menu cards and folded napkins" loading="lazy">
+              </picture>
             </figure>
           </div>
           <p class="caption exp-upper__caption">Each napkin hand-folded into a unique pattern, with place settings and name tags designed to match.</p>
@@ -63,8 +75,12 @@
       <div class="exp-beat">
         <div class="brief__group brief__group--lower exp-lower">
           <figure class="brief__photo brief__photo--lower">
-            <img src="/images/projects/maggie/c2-1.jpg?v=2" width="1400" height="787"
-                 alt="Guests mingling around a long garden table set with flowers, candles and wine" loading="lazy">
+            <picture>
+              <source type="image/webp" srcset="/images/projects/maggie/c2-1-480.webp 480w, /images/projects/maggie/c2-1-800.webp 800w, /images/projects/maggie/c2-1-1200.webp 1200w, /images/projects/maggie/c2-1-1400.webp 1400w"
+                      sizes="(max-width: 760px) calc(100vw - 40px), 61.2vw">
+              <img src="/images/projects/maggie/c2-1.jpg?v=2" width="1400" height="787"
+                   alt="Guests mingling around a long garden table set with flowers, candles and wine" loading="lazy">
+            </picture>
           </figure>
           <p class="brief__text brief__text--side caption">Florals arranged to complement the food and wine.</p>
         </div>
@@ -75,12 +91,20 @@
         <div class="exp-third">
           <div class="exp-third__photos">
             <figure class="brief__photo exp-third__photo">
-              <img src="/images/projects/maggie/d1-menu.jpg?v=2" width="1400" height="1082"
-                   alt="The illustrated dinner menu designed for the party, shown as a two-page spread" loading="lazy">
+              <picture>
+                <source type="image/webp" srcset="/images/projects/maggie/d1-menu-480.webp 480w, /images/projects/maggie/d1-menu-800.webp 800w, /images/projects/maggie/d1-menu-1200.webp 1200w, /images/projects/maggie/d1-menu-1400.webp 1400w"
+                        sizes="(max-width: 760px) calc(100vw - 40px), 42.9vw">
+                <img src="/images/projects/maggie/d1-menu.jpg?v=2" width="1400" height="1082"
+                     alt="The illustrated dinner menu designed for the party, shown as a two-page spread" loading="lazy">
+              </picture>
             </figure>
             <figure class="brief__photo exp-third__photo">
-              <img src="/images/projects/maggie/d5-placecards.jpg" width="1083" height="1400"
-                   alt="Illustrated place cards, each a different drink labelled with a guest's name" loading="lazy">
+              <picture>
+                <source type="image/webp" srcset="/images/projects/maggie/d5-placecards-480.webp 480w, /images/projects/maggie/d5-placecards-800.webp 800w, /images/projects/maggie/d5-placecards-1083.webp 1083w"
+                        sizes="(max-width: 760px) calc(100vw - 40px), 25.7vw">
+                <img src="/images/projects/maggie/d5-placecards.jpg" width="1083" height="1400"
+                     alt="Illustrated place cards, each a different drink labelled with a guest's name" loading="lazy">
+              </picture>
             </figure>
           </div>
           <dl class="exp-third__text">
@@ -101,16 +125,28 @@
       <div class="exp-beat">
         <div class="exp-row">
           <figure class="brief__photo exp-row__photo">
-            <img src="/images/projects/maggie/a1.jpg" width="978" height="1222"
-                 alt="A guest with her hands clasped as a candlelit birthday cake is brought to the table" loading="lazy">
+            <picture>
+              <source type="image/webp" srcset="/images/projects/maggie/a1-480.webp 480w, /images/projects/maggie/a1-800.webp 800w, /images/projects/maggie/a1-978.webp 978w"
+                      sizes="(max-width: 760px) calc(100vw - 40px), 25vw">
+              <img src="/images/projects/maggie/a1.jpg" width="978" height="1222"
+                   alt="A guest with her hands clasped as a candlelit birthday cake is brought to the table" loading="lazy">
+            </picture>
           </figure>
           <figure class="brief__photo exp-row__photo">
-            <img src="/images/projects/maggie/a2.jpg" width="1385" height="1108"
-                 alt="Friends smiling together at the candlelit table beneath the tree" loading="lazy">
+            <picture>
+              <source type="image/webp" srcset="/images/projects/maggie/a2-480.webp 480w, /images/projects/maggie/a2-800.webp 800w, /images/projects/maggie/a2-1200.webp 1200w, /images/projects/maggie/a2-1385.webp 1385w"
+                      sizes="(max-width: 760px) calc(100vw - 40px), 39.1vw">
+              <img src="/images/projects/maggie/a2.jpg" width="1385" height="1108"
+                   alt="Friends smiling together at the candlelit table beneath the tree" loading="lazy">
+            </picture>
           </figure>
           <figure class="brief__photo exp-row__photo">
-            <img src="/images/projects/maggie/a3.jpg" width="1120" height="1400"
-                 alt="Two guests talking at the table under hanging stars and string lights" loading="lazy">
+            <picture>
+              <source type="image/webp" srcset="/images/projects/maggie/a3-480.webp 480w, /images/projects/maggie/a3-800.webp 800w, /images/projects/maggie/a3-1120.webp 1120w"
+                      sizes="(max-width: 760px) calc(100vw - 40px), 25vw">
+              <img src="/images/projects/maggie/a3.jpg" width="1120" height="1400"
+                   alt="Two guests talking at the table under hanging stars and string lights" loading="lazy">
+            </picture>
           </figure>
         </div>
       </div>
@@ -121,16 +157,28 @@
           <h2 class="exp-gallery__heading">BEHIND THE SCENES</h2>
           <div class="exp-gallery__row">
             <figure class="brief__photo exp-gallery__photo">
-              <img src="/images/projects/maggie/bts3.jpg" width="1334" height="1067"
-                   alt="Trays of pasta and starters beside a bin of champagne on ice" loading="lazy">
+              <picture>
+                <source type="image/webp" srcset="/images/projects/maggie/bts3-480.webp 480w, /images/projects/maggie/bts3-800.webp 800w, /images/projects/maggie/bts3-1200.webp 1200w, /images/projects/maggie/bts3-1334.webp 1334w"
+                        sizes="(max-width: 760px) calc(100vw - 40px), 31.9vw">
+                <img src="/images/projects/maggie/bts3.jpg" width="1334" height="1067"
+                     alt="Trays of pasta and starters beside a bin of champagne on ice" loading="lazy">
+              </picture>
             </figure>
             <figure class="brief__photo exp-gallery__photo">
-              <img src="/images/projects/maggie/bts2.jpg" width="1237" height="1546"
-                   alt="A place setting with a menu card beside a tin tray of baked starters and sushi" loading="lazy">
+              <picture>
+                <source type="image/webp" srcset="/images/projects/maggie/bts2-480.webp 480w, /images/projects/maggie/bts2-800.webp 800w, /images/projects/maggie/bts2-1200.webp 1200w"
+                        sizes="(max-width: 760px) calc(100vw - 40px), 20.5vw">
+                <img src="/images/projects/maggie/bts2.jpg" width="1237" height="1546"
+                     alt="A place setting with a menu card beside a tin tray of baked starters and sushi" loading="lazy">
+              </picture>
             </figure>
             <figure class="brief__photo exp-gallery__photo">
-              <img src="/images/projects/maggie/bts1.jpg" width="1180" height="1475"
-                   alt="Pizza slices on tin trays laid out next to a ribbon-wrapped wine bin" loading="lazy">
+              <picture>
+                <source type="image/webp" srcset="/images/projects/maggie/bts1-480.webp 480w, /images/projects/maggie/bts1-800.webp 800w, /images/projects/maggie/bts1-1180.webp 1180w"
+                        sizes="(max-width: 760px) calc(100vw - 40px), 20.5vw">
+                <img src="/images/projects/maggie/bts1.jpg" width="1180" height="1475"
+                     alt="Pizza slices on tin trays laid out next to a ribbon-wrapped wine bin" loading="lazy">
+              </picture>
             </figure>
           </div>
           <div class="exp-gallery__caption">

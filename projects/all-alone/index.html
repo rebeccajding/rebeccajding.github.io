@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,400&display=swap">
-  <link rel="stylesheet" href="/styles.css?v=mob1">
+  <link rel="stylesheet" href="/styles.css?v=mob3">
   <link rel="stylesheet" href="/projects/project.css?v=pe58">
 </head>
 <body class="page-project">
@@ -25,8 +25,12 @@
   <main>
     <!-- Same hero as the live-event pages. Photo from E-AA/Hero.png. -->
     <section class="hero" aria-labelledby="project-title">
-      <img class="hero__img" src="/images/projects/all-alone/hero.jpg" width="2248" height="1134"
-           style="--focus: 50% 50%;" alt="A woman in a dark jacket standing alone in a field of tall dry grass" fetchpriority="high">
+      <picture>
+        <source type="image/webp" srcset="/images/projects/all-alone/hero-480.webp 480w, /images/projects/all-alone/hero-800.webp 800w, /images/projects/all-alone/hero-1200.webp 1200w, /images/projects/all-alone/hero-1600.webp 1600w, /images/projects/all-alone/hero-2000.webp 2000w"
+                sizes="(max-width: 760px) max(100vw, calc(1.982 * max(100vh, 1001px))), max(100vw, calc(1.982 * 100vh))">
+        <img class="hero__img" src="/images/projects/all-alone/hero.jpg" width="2248" height="1134"
+             style="--focus: 50% 50%;" alt="A woman in a dark jacket standing alone in a field of tall dry grass" fetchpriority="high">
+      </picture>
       <div class="hero__overlay" aria-hidden="true"></div>
       <h1 class="hero__title" id="project-title">ALL ALONE</h1>
       <dl class="hero__details">
@@ -46,8 +50,12 @@
         <div class="exp-third exp-third--single exp-third--awards">
           <div class="exp-third__photos">
             <figure class="brief__photo exp-third__photo">
-              <img src="/images/projects/all-alone/poster.jpg" width="1071" height="1417"
-                   alt="All Alone film poster: the title in blue brush lettering over figures framed by leaves, with World Cinema Antwerp and Lift-Off Global Network festival laurels" loading="lazy">
+              <picture>
+                <source type="image/webp" srcset="/images/projects/all-alone/poster-480.webp 480w, /images/projects/all-alone/poster-800.webp 800w, /images/projects/all-alone/poster-1071.webp 1071w"
+                        sizes="(max-width: 760px) calc(100vw - 40px), 31.6vw">
+                <img src="/images/projects/all-alone/poster.jpg" width="1071" height="1417"
+                     alt="All Alone film poster: the title in blue brush lettering over figures framed by leaves, with World Cinema Antwerp and Lift-Off Global Network festival laurels" loading="lazy">
+              </picture>
             </figure>
           </div>
           <dl class="exp-third__text">
@@ -69,12 +77,20 @@
         <div class="exp-stack">
           <div class="exp-duo exp-duo--callsheet">
             <figure class="brief__photo">
-              <img src="/images/projects/all-alone/callsheet-1.jpg?v=2" width="1836" height="2200"
-                   alt="Call sheet page one: production contacts, call time 1200, weather and sunset times, a location map, and the scene list with set descriptions and locations" loading="lazy">
+              <picture>
+                <source type="image/webp" srcset="/images/projects/all-alone/callsheet-1-480.webp 480w, /images/projects/all-alone/callsheet-1-800.webp 800w, /images/projects/all-alone/callsheet-1-1200.webp 1200w, /images/projects/all-alone/callsheet-1-1600.webp 1600w"
+                        sizes="(max-width: 760px) calc(100vw - 40px), 34.9vw">
+                <img src="/images/projects/all-alone/callsheet-1.jpg?v=2" width="1836" height="2200"
+                     alt="Call sheet page one: production contacts, call time 1200, weather and sunset times, a location map, and the scene list with set descriptions and locations" loading="lazy">
+              </picture>
             </figure>
             <figure class="brief__photo">
-              <img src="/images/projects/all-alone/callsheet-2.jpg?v=2" width="1836" height="2200"
-                   alt="Call sheet page two: cast call times and wardrobe instructions, COVID production notes, and crew positions" loading="lazy">
+              <picture>
+                <source type="image/webp" srcset="/images/projects/all-alone/callsheet-2-480.webp 480w, /images/projects/all-alone/callsheet-2-800.webp 800w, /images/projects/all-alone/callsheet-2-1200.webp 1200w, /images/projects/all-alone/callsheet-2-1600.webp 1600w"
+                        sizes="(max-width: 760px) calc(100vw - 40px), 34.9vw">
+                <img src="/images/projects/all-alone/callsheet-2.jpg?v=2" width="1836" height="2200"
+                     alt="Call sheet page two: cast call times and wardrobe instructions, COVID production notes, and crew positions" loading="lazy">
+              </picture>
             </figure>
           </div>
           <div class="exp-stack__caption">
@@ -90,16 +106,28 @@
           <h2 class="exp-gallery__heading">BEHIND THE SCENES</h2>
           <div class="exp-gallery__row exp-gallery__row--aa">
             <figure class="brief__photo exp-gallery__photo">
-              <img src="/images/projects/all-alone/bts1.jpg" width="2400" height="1800"
-                   alt="Cast members bundled in coats and blankets, sitting together on set at night" loading="lazy">
+              <picture>
+                <source type="image/webp" srcset="/images/projects/all-alone/bts1-480.webp 480w, /images/projects/all-alone/bts1-800.webp 800w, /images/projects/all-alone/bts1-1200.webp 1200w, /images/projects/all-alone/bts1-1600.webp 1600w, /images/projects/all-alone/bts1-2000.webp 2000w"
+                        sizes="(max-width: 760px) calc(100vw - 40px), 26.8vw">
+                <img src="/images/projects/all-alone/bts1.jpg" width="2400" height="1800"
+                     alt="Cast members bundled in coats and blankets, sitting together on set at night" loading="lazy">
+              </picture>
             </figure>
             <figure class="brief__photo exp-gallery__photo">
-              <img src="/images/projects/all-alone/bts2.jpg" width="2400" height="1800"
-                   alt="A camera monitor showing a night shot of a bed in an empty field, with recording settings along the edges" loading="lazy">
+              <picture>
+                <source type="image/webp" srcset="/images/projects/all-alone/bts2-480.webp 480w, /images/projects/all-alone/bts2-800.webp 800w, /images/projects/all-alone/bts2-1200.webp 1200w, /images/projects/all-alone/bts2-1600.webp 1600w, /images/projects/all-alone/bts2-2000.webp 2000w"
+                        sizes="(max-width: 760px) calc(100vw - 40px), 26.8vw">
+                <img src="/images/projects/all-alone/bts2.jpg" width="2400" height="1800"
+                     alt="A camera monitor showing a night shot of a bed in an empty field, with recording settings along the edges" loading="lazy">
+              </picture>
             </figure>
             <figure class="brief__photo exp-gallery__photo">
-              <img src="/images/projects/all-alone/bts3.jpg" width="2400" height="1349"
-                   alt="A metal bed frame standing alone on the beach at night, lit by a single light" loading="lazy">
+              <picture>
+                <source type="image/webp" srcset="/images/projects/all-alone/bts3-480.webp 480w, /images/projects/all-alone/bts3-800.webp 800w, /images/projects/all-alone/bts3-1200.webp 1200w, /images/projects/all-alone/bts3-1600.webp 1600w, /images/projects/all-alone/bts3-2000.webp 2000w"
+                        sizes="(max-width: 760px) calc(100vw - 40px), 35.8vw">
+                <img src="/images/projects/all-alone/bts3.jpg" width="2400" height="1349"
+                     alt="A metal bed frame standing alone on the beach at night, lit by a single light" loading="lazy">
+              </picture>
             </figure>
           </div>
         </div>
@@ -109,28 +137,52 @@
       <div class="exp-beat exp-beat--center">
         <div class="exp-stills">
           <figure class="brief__photo">
-            <img src="/images/projects/all-alone/still-1.jpg" width="1200" height="472"
-                 alt="Students in coats walking along a school pavement, seen from behind" loading="lazy">
+            <picture>
+              <source type="image/webp" srcset="/images/projects/all-alone/still-1-480.webp 480w, /images/projects/all-alone/still-1-800.webp 800w, /images/projects/all-alone/still-1-1200.webp 1200w"
+                      sizes="(max-width: 760px) 101.4vw, 49.9vw">
+              <img src="/images/projects/all-alone/still-1.jpg" width="1200" height="472"
+                   alt="Students in coats walking along a school pavement, seen from behind" loading="lazy">
+            </picture>
           </figure>
           <figure class="brief__photo">
-            <img src="/images/projects/all-alone/still-2.jpg" width="1200" height="468"
-                 alt="The yellow heritage house among tall trees, a small figure on the front steps" loading="lazy">
+            <picture>
+              <source type="image/webp" srcset="/images/projects/all-alone/still-2-480.webp 480w, /images/projects/all-alone/still-2-800.webp 800w, /images/projects/all-alone/still-2-1200.webp 1200w"
+                      sizes="(max-width: 760px) 102.3vw, 50.3vw">
+              <img src="/images/projects/all-alone/still-2.jpg" width="1200" height="468"
+                   alt="The yellow heritage house among tall trees, a small figure on the front steps" loading="lazy">
+            </picture>
           </figure>
           <figure class="brief__photo">
-            <img src="/images/projects/all-alone/still-4.jpg" width="2400" height="1008"
-                 alt="The performer in a loose cream blouse crouched in a mossy green forest" loading="lazy">
+            <picture>
+              <source type="image/webp" srcset="/images/projects/all-alone/still-4-480.webp 480w, /images/projects/all-alone/still-4-800.webp 800w, /images/projects/all-alone/still-4-1200.webp 1200w, /images/projects/all-alone/still-4-1600.webp 1600w, /images/projects/all-alone/still-4-2000.webp 2000w"
+                      sizes="(max-width: 760px) calc(100vw - 40px), 46.8vw">
+              <img src="/images/projects/all-alone/still-4.jpg" width="2400" height="1008"
+                   alt="The performer in a loose cream blouse crouched in a mossy green forest" loading="lazy">
+            </picture>
           </figure>
           <figure class="brief__photo">
-            <img src="/images/projects/all-alone/still-5.jpg" width="2400" height="1008"
-                 alt="The performer at night on the beach, holding a glowing light in her hands" loading="lazy">
+            <picture>
+              <source type="image/webp" srcset="/images/projects/all-alone/still-5-480.webp 480w, /images/projects/all-alone/still-5-800.webp 800w, /images/projects/all-alone/still-5-1200.webp 1200w, /images/projects/all-alone/still-5-1600.webp 1600w, /images/projects/all-alone/still-5-2000.webp 2000w"
+                      sizes="(max-width: 760px) calc(100vw - 40px), 46.8vw">
+              <img src="/images/projects/all-alone/still-5.jpg" width="2400" height="1008"
+                   alt="The performer at night on the beach, holding a glowing light in her hands" loading="lazy">
+            </picture>
           </figure>
           <figure class="brief__photo">
-            <img src="/images/projects/all-alone/still-6.jpg" width="2400" height="1008"
-                 alt="Two small figures on a dark beach under heavy cloud, mountains behind, subtitled “All alone”" loading="lazy">
+            <picture>
+              <source type="image/webp" srcset="/images/projects/all-alone/still-6-480.webp 480w, /images/projects/all-alone/still-6-800.webp 800w, /images/projects/all-alone/still-6-1200.webp 1200w, /images/projects/all-alone/still-6-1600.webp 1600w, /images/projects/all-alone/still-6-2000.webp 2000w"
+                      sizes="(max-width: 760px) calc(100vw - 40px), 46.8vw">
+              <img src="/images/projects/all-alone/still-6.jpg" width="2400" height="1008"
+                   alt="Two small figures on a dark beach under heavy cloud, mountains behind, subtitled “All alone”" loading="lazy">
+            </picture>
           </figure>
           <figure class="brief__photo">
-            <img src="/images/projects/all-alone/still-7.jpg" width="2400" height="1008"
-                 alt="The performer at night touching her ear, looking into the camera, subtitled “Me alone”" loading="lazy">
+            <picture>
+              <source type="image/webp" srcset="/images/projects/all-alone/still-7-480.webp 480w, /images/projects/all-alone/still-7-800.webp 800w, /images/projects/all-alone/still-7-1200.webp 1200w, /images/projects/all-alone/still-7-1600.webp 1600w, /images/projects/all-alone/still-7-2000.webp 2000w"
+                      sizes="(max-width: 760px) calc(100vw - 40px), 46.8vw">
+              <img src="/images/projects/all-alone/still-7.jpg" width="2400" height="1008"
+                   alt="The performer at night touching her ear, looking into the camera, subtitled “Me alone”" loading="lazy">
+            </picture>
           </figure>
         </div>
       </div>
