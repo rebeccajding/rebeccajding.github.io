@@ -861,7 +861,9 @@
   /* Sections */
   .brief--exp { --exp-gap: 72px; }
   .page-project .brief--exp .exp-beat { display: block; padding: 0 20px; }
-  .page-project .brief--exp .exp-beat.exp-beat--bleed { padding: 0; }
+  /* Same gap as between sections: after the hero, and before the end link */
+  .page-project .brief--exp .exp-beat:first-child { padding-top: var(--exp-gap); }
+  .page-project .brief--exp .exp-beat:last-child { padding-bottom: var(--exp-gap); }
 
   /* Every grouping becomes a full-width column at its natural height */
   .page-project .brief--exp :is(
