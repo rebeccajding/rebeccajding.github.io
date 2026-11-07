@@ -201,3 +201,35 @@ img { display: block; }
   line-height: 1.2;
   pointer-events: none;
 }
+
+/* ==========================================================================
+   Phones (≤ 760px wide): larger cards that swipe sideways, the first one at
+   the left gutter and the next peeking in from the right; the R sits above
+   the cards. Sizes in px / vw.
+   ========================================================================== */
+@media (max-width: 760px) {
+  :root { --card-w: 66vw; }
+  .header { top: 20px; left: 20px; right: 20px; font-size: 12px; }
+
+  .landing .track__list {
+    /* card stack (photo 4:3 + bar + label ≈ 1.66 × width) centred, nudged down for the R */
+    padding-top: calc(50dvh - var(--card-w) * 0.83 + 24px);
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .landing .track__item + .track__item { margin-left: 14px; }
+  .landing .card { width: var(--card-w); }
+  .landing .card__bar {
+    height: calc(var(--card-w) * 39 / 269);
+    margin-top: calc(var(--card-w) * 26 / 269);
+  }
+  .landing .card__label { margin-top: 12px; padding-left: 4px; font-size: 12px; }
+  .landing .track__end { padding-top: calc(var(--card-w) * 2 / 3); font-size: 11px; }
+
+  .monogram {
+    left: 20px;
+    top: calc(50dvh - var(--card-w) * 0.83 + 24px - 68px);
+    font-size: 52px;
+  }
+  .statement { bottom: 28px; font-size: 11px; }
+}

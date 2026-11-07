@@ -184,3 +184,46 @@
 }
 /* Mirror of the intro's pull-up: the first medium's photo starts ~100px below the text */
 .featured--mediums { margin-top: calc(217.4 * var(--u) - 50dvh); }
+
+/* ==========================================================================
+   Phones (≤ 760px wide): same pinned scroll, sized in px. Each photo spans
+   the screen between 20px gutters with its name centred underneath; the
+   hint and progress rail are dropped (they would sit over the photos).
+   ========================================================================== */
+@media (max-width: 760px) {
+  .page-projects {
+    --card-w: calc(100vw - 40px);
+    --card-h: calc(var(--card-w) * 9 / 16);
+    /* visible spacing between project centres: half the full-size photo +
+       half a neighbour at its small size (320/620) + room for a caption */
+    --pitch: calc(var(--card-h) * (0.5 + 320 / 620 / 2) + 96px);
+    --scroll-pitch: calc(var(--pitch) * 1.3);
+  }
+  .page-projects .header { top: 20px; left: 20px; right: 20px; font-size: 12px; }
+  .pins { display: none; }
+
+  .featured__track { width: 100vw; margin-left: -50vw; }
+  .row__index { display: none; }
+  .row__media { left: 20px; }
+  /* caption follows the photo's bottom edge as it grows and shrinks */
+  .row__caption {
+    left: 20px;
+    right: 20px;
+    top: calc(50% + var(--card-h) * var(--k, 1) / 2 + 12px);
+    transform: none;
+    align-items: center;
+    gap: 6px;
+  }
+  .row__name { font-size: 13px; transform-origin: center top; }
+  .row__date { font-size: 11px; }
+
+  /* Break text: ~50px below the last photo's caption, wrapping to the screen */
+  .mediums__intro {
+    margin-top: calc(var(--card-h) / 2 + 56px - 50dvh);
+    padding: 24px 20px;
+    font-size: 14px;
+    white-space: normal;
+  }
+  /* First medium's photo starts ~48px below the break text */
+  .featured--mediums { margin-top: calc(var(--card-h) / 2 + 24px - 50dvh); }
+}

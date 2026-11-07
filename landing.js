@@ -100,8 +100,15 @@
     return Math.min(1, Math.max(0, t));
   }
 
+  // Phones: the first card starts at the left gutter, so there is no fade.
+  const phone = window.matchMedia('(max-width: 760px)');
+
   function updateFade() {
     fadeQueued = false;
+    if (phone.matches) {
+      for (const card of cards) card.style.opacity = '';
+      return;
+    }
     const vw = window.innerWidth;
     for (const card of cards) {
       card.style.opacity = cardOpacity(card.getBoundingClientRect().left, vw).toFixed(3);

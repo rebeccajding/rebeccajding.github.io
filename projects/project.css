@@ -802,3 +802,117 @@
   overflow: hidden;
 }
 .brief--exp .exp-stills img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* ==========================================================================
+   Phones (≤ 760px wide). The desktop layout scales with --u, which makes
+   everything tiny on a phone, so here each section becomes one column:
+   20px side gutters, photos full width in their own proportions, text
+   beneath. Spacing is in px.
+   ========================================================================== */
+@media (max-width: 760px) {
+  .page-project {
+    --caption-size: 14px;
+    --header-solid: 46px;
+  }
+
+  /* Fixed header: brand left, PROJECTS right; the centred index is dropped
+     (the title is on the hero, and long names would collide) */
+  .hero__header { top: 18px; left: 20px; right: 20px; font-size: 12px; }
+  .hero__index { display: none; }
+
+  /* Hero: title and details stacked in the middle of the screen */
+  .hero {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 36px;
+    padding: 96px 20px 88px;
+  }
+  .page-project .hero__title {
+    position: static;
+    font-size: 44px;
+    line-height: 1.1;
+    white-space: normal;
+  }
+  .page-project .hero__title--long,
+  .page-project .hero__title--longer { font-size: 36px; }
+  .hero__details { position: static; gap: 10px; }
+  .hero__row { gap: 8px; }
+  .hero__row dt { flex: none; width: 112px; font-size: 10px; line-height: 20px; }
+  .hero__row dd { flex: 1; width: auto; font-size: 14px; line-height: 20px; }
+  .hero__foot { bottom: 24px; font-size: 11px; }
+  .hero__foot--left { left: 20px; }
+  .hero__foot--right { left: auto; right: 20px; }
+
+  /* Sections */
+  .brief--exp { --exp-gap: 72px; }
+  .page-project .brief--exp .exp-beat { display: block; padding: 0 20px; }
+  .page-project .brief--exp .exp-beat.exp-beat--bleed { padding: 0; }
+
+  /* Every grouping becomes a full-width column at its natural height */
+  .page-project .brief--exp :is(
+    .exp-upper, .exp-lower, .exp-third, .exp-gallery, .exp-stack, .exp-bts-tasks,
+    .exp-bts-task, .exp-docs-wrap, .exp-upper__photos, .exp-third__photos, .exp-row,
+    .exp-gallery__row, .exp-duo, .exp-docs, .exp-ensemble, .exp-edge, .exp-mosaic, .exp-stills
+  ) {
+    position: static;
+    transform: none;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    gap: 16px;
+  }
+  /* Photos within one group sit closer together */
+  .page-project .brief--exp :is(
+    .exp-upper__photos, .exp-third__photos, .exp-row, .exp-gallery__row, .exp-duo,
+    .exp-ensemble, .exp-edge, .exp-mosaic, .exp-stills
+  ) { gap: 10px; }
+  /* Documents carry a caption under each one, so a wider gap between them */
+  .page-project .brief--exp .exp-docs { gap: 28px; }
+  /* Separate tasks behind the scenes read as separate groups */
+  .page-project .brief--exp .exp-bts-tasks { gap: 36px; }
+
+  /* Photos: full width, own proportions */
+  .page-project .brief--exp .brief__photo {
+    flex: none;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    aspect-ratio: auto;
+  }
+  .page-project .brief--exp .brief__photo img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+  }
+  /* The film stills keep their one shared widescreen frame */
+  .page-project .brief--exp .exp-stills .brief__photo { aspect-ratio: 2880 / 1210; }
+  .page-project .brief--exp .exp-stills .brief__photo img { height: 100%; object-fit: cover; }
+
+  /* Text beside photos moves beneath them */
+  .page-project .brief--exp :is(.exp-third__text, .brief__text--side, .exp-centred__text) {
+    width: auto;
+    margin: 0;
+    text-align: left;
+    gap: 16px;
+  }
+  .page-project .brief--exp :is(.exp-stack__caption, .exp-gallery__caption, .exp-upper__caption, .exp-bts__caption) { margin-top: 0; }
+  .page-project .brief--exp .exp-docs__caption { margin-top: 10px; }
+  .page-project .brief--exp :is(.exp-stack__caption, .exp-gallery__caption, .exp-docs__caption, .exp-bts__caption) p + p,
+  .page-project .brief--exp .exp-third__block dd:not(.exp-third__note) { margin-top: 4px; }
+  .page-project .brief--exp .exp-gallery__heading { margin: 0; font-size: 11px; }
+
+  /* Spotify player: full width at its own height */
+  .page-project .brief--exp .exp-embed { width: 100%; }
+
+  /* End link */
+  .project-end { padding: 0 20px 64px; }
+  .hero + .project-end { padding-top: 72px; }
+  .project-end__link { font-size: 13px; }
+}
